@@ -40,4 +40,28 @@ class DB {
             }
         }
     }
+
+    public function insert($table, $fields = []) {
+        $fieldString = '';
+        $valueString = '';
+        $values = [];
+
+        foreach($fields as $field => $value){
+            $fieldString .='`' . $field . '`,';
+            $valueString .= '?,';
+            $values[] = $value;
+        }
+        $fieldString = rtrim($fieldString, ',');
+        $valueString = rtrim($valueString, ',');
+        $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ({$valueString})";
+        $stmt = $this->query($sql, $values);
+        // if(!$stmt->error()){
+        //     return true;
+        // }
+        // return false;
+    }
+  
+    public function error(){
+        $this->_error;
+    }
 }
