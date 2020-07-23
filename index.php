@@ -25,5 +25,7 @@ session_start();
 //split the url into an array of strings the remove whitespaces
 $url = isset($_SERVER['PATH_INFO'])? explode('/', ltrim($_SERVER['PATH_INFO'], '/')): [];
 
+//Database connection instance
+$db = DB::getInstance();
 //Route the requests
 Router::route($url);
